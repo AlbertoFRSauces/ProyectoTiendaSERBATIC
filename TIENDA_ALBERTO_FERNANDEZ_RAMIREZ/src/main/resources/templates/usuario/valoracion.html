@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="<%=request.getContextPath()%>/media/logo-tienda.ico">
+        <title>Valorar producto</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link th:href="@{/bootstrap/assets/dist/css/bootstrap.min.css}" rel="stylesheet">
+        
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" type="text/css" th:href="@{http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css}">
+        <link th:href="@{/css/estilos.css}" rel="stylesheet">
+        <link th:href="@{/css/estilosPerfilUsuario.css}" rel="stylesheet">
+        
+        <style>
+            header{
+                margin-bottom:20px;
+            }
+            .anchoContenedor{
+                width: 100%;
+            }
+            .altoFormulario{
+               height: auto;
+            }
+            footer{
+               position: fixed;
+               bottom: 0;
+               width: 100%;
+            }
+            .letraBotonesMenu{
+                font-size: 20px;
+                border: none;
+            }
+            .verPedidos{
+                background-color: white;
+            }
+            .bi{
+                vertical-align: -.125em;
+            }
+            .botonCrearValoracion{
+                border-radius: 0px;
+                border: none;
+                margin-top: 15px;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <header th:replace="/fragments/header"></header>
+        <div class="container">
+        <div class="row gutters">
+        <div th:replace="/fragments/perfil"></div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body verPedidos">
+                     <div class="card">
+                         <div class="card-body">
+                             <div class="row">
+                                 <div class="col-lg-5 col-md-5 col-sm-6">
+                                    <h3 th:text="${itemValorar.nombre}" class="card-title"></h3>
+                                    <br>
+                                    <div class="white-box text-center"><img th:src="@{/img/productos/}+${itemValorar.id}+@{.PNG}" class="img-responsive img-fluid"></div>
+                                </div>
+                                <div class="col-lg-7 col-md-7 col-sm-6" style="padding-top: 75px;">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <h4 class="mb-3 text-primary">Valorar producto</h4>
+                                    </div>
+                                    <form th:action="@{/usuario/miPerfil/crearNuevaValoracion}" th:object="${valoracion}" method="post" name="formularioNuevaValoracion">
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="comentario">Comentario</label>
+                                                <textarea th:field="*{comentario}" class="form-control" id="comentario"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="valoracion">Valoracion (Entre 0 y 5)</label>
+                                                <input type="number" th:field="*{valoracion}" class="form-control" id="valoracion" min="0" max="5">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <input type="submit" value="valorar" name="valorar" id="valorar" class="w-50 btn btn-lg btn-primary botonCrearValoracion" style="width: 100% !important;"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer th:replace="/fragments/footer"></footer>
+    </body>
+</html>
